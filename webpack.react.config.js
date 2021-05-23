@@ -32,6 +32,15 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.(png|jpe?g|gif|jp2|webp)$/,
+                use: [ 
+                    {
+                        loader: 'file-loader',
+                        options: { name: '[name].[ext]' },
+                    },
+                ],
+            },
         ],
     },
     devServer: {

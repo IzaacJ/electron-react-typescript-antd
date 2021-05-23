@@ -5,7 +5,8 @@ import ReactDom from 'react-dom';
 import {
     Layout,
     Typography,
-    Space
+    Space,
+    Image
 } from 'antd';
 /* Import Ant Design iconography */
 import {
@@ -15,13 +16,14 @@ import {
 
 /* Import app less */
 import './app.less';
+/* Import app logo */
+import logo from '../images/logo.png';
 
 /* Import custom components */
 import {
     Sidebar,
     Description
 } from './components';
-import { fixControlledValue } from 'antd/lib/input/Input';
 
 const { Header, Sider, Content, Footer } = Layout;
 const { Title, Text } = Typography;
@@ -53,7 +55,8 @@ class App extends React.Component {
                             className: 'trigger',
                             onClick: this.toggle,
                         })}
-                        <Title level={3}>ERT - Electron React TypeScript</Title>
+                        <Image width={50} src={logo} preview={false} style={{ margin: '8px 0 0 0' }}/>
+                        <Title level={3} style={{ display: 'inline-block', position: 'relative', top: '-18px' }}>ERT - Electron React TypeScript</Title>
                     </Header>
                     <Content style={{ padding: 20 }}>
                         <Description />
