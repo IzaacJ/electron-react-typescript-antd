@@ -1,19 +1,32 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import windowStateKeeper from 'electron-window-state';
 
 let mainWindow: Electron.BrowserWindow | null;
+let mainWindowState: any;
 
 function createWindow() {
-    mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+    mainWindowState = windowStateKeeper({
+        defaultWidth: 1024,
+        defaultHeight: 720
+    });
+    
+    const windowOptions = {
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true,
         },
-    });
+    };
+
+    mainWindow = new BrowserWindow(windowOptions);
+
+    mainWindowState.manage(mainWindow);
 
     if (process.env.NODE_ENV === 'development') {
         mainWindow.loadURL('http://localhost:4000');
